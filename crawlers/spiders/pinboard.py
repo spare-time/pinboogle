@@ -10,10 +10,13 @@ class PinboardSpider(scrapy.Spider):
     def __init__(self, user='lfcipriani', after='1', *args, **kwargs):
         super(PinboardSpider, self).__init__(*args, **kwargs)
         self.start_urls = ['https://pinboard.in/u:%s/after:%s' % (user, after)]
+        self.logger.info("[PINBOARD_SPIDER] Start URL: %s" % self.start_urls[0])
 
     def parse(self, response):
         # fetches json representation of bookmarks instead of using css or xpath
         bookmarks = re.findall('bmarks\[\d+\] = (\{.*?\});', response.body.decode('utf-8'), re.DOTALL | re.MULTILINE)
+        self.logger.info("[PINBOARD_SPIDER] Bookmarks on this page: %d" % len(bookmarks))
+
         for bookmark in bookmarks:
             yield self.parse_bookmark(json.loads(bookmark))
 
