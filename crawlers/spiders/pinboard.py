@@ -38,7 +38,7 @@ class PinboardSpider(scrapy.Spider):
         created_at = datetime.datetime.strptime(bookmark['created'],'%Y-%m-%d %H:%M:%S')
         pin['created_at'] = created_at.isoformat()
 
-        pin['saved_by_others'] = int(bookmark['url_count'])
+        pin['saved_by_others'] = bookmark['url_count']
         pin['tags'] = bookmark['tags']
         pin['private'] = bookmark['private']
         pin['to_read'] = bookmark['toread']
