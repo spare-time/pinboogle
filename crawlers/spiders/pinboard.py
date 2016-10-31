@@ -35,5 +35,27 @@ class PinboardSpider(scrapy.Spider):
         pin['to_read'] = bookmark['toread']
         pin['author'] = bookmark['author']
 
-        return pin
+        request = scrapy.Request(pin['link_url'], callback=self.parse_external_link)
+        request.meta['pin'] = pin # this passes over the pin item to the request
+        return request
 
+    def parse_external_link(self, response):
+        pin = response.meta['pin']
+
+        pin['html_fetch_date'] = datetime.datetime.utcnow().isoformat() 
+        pin['html_code'] = response.status
+        pin['html_content'] = ""
+        pin['html_content_size'] = 0
+        if response.body:
+            soup = BeautifulSoup(response.body, 'html.parser')
+            # http://stackoverflow.com/questions/22799990/beatifulsoup4-get-text-still-has-javascript
+            for script in soup(["script", "style"]):
+                script.extract()
+            text = soup.get_text(strip=True)
+            lines = (line.strip() for line in text.splitlines())
+            chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+            text = '\n'.join(chunk for chunk in chunks if chunk)
+            pin['html_content'] = text.encode('utf-8')
+            pin['html_content_size'] = len(pin['html_content'])
+
+        return pin
