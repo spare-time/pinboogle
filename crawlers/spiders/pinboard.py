@@ -20,6 +20,12 @@ class PinboardSpider(scrapy.Spider):
         for bookmark in bookmarks:
             yield self.parse_bookmark(json.loads(bookmark))
 
+        next_page = response.css('a#top_later::attr(href)').extract_first()
+        if next_page:
+            next_page = response.urljoin(next_page)
+            self.logger.info("[PINBOARD_SPIDER] Fetching next page: %s" % next_page)
+            yield scrapy.Request(next_page, callback=self.parse)
+
     def parse_bookmark(self, bookmark):
         pin = PinboardLinkItem()
 
