@@ -51,11 +51,11 @@ class PinboardSpider(scrapy.Spider):
             # http://stackoverflow.com/questions/22799990/beatifulsoup4-get-text-still-has-javascript
             for script in soup(["script", "style"]):
                 script.extract()
-            text = soup.get_text(strip=True)
+            text = soup.get_text()
             lines = (line.strip() for line in text.splitlines())
             chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
             text = '\n'.join(chunk for chunk in chunks if chunk)
-            pin['html_content'] = text.encode('utf-8')
+            pin['html_content'] = text
             pin['html_content_size'] = len(pin['html_content'])
 
         return pin
