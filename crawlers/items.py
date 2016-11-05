@@ -28,6 +28,28 @@ class PinboardLinkItem(scrapy.Item):
     html_content_size = scrapy.Field()
     html_fetch_date   = scrapy.Field()
 
+
+# Sample Solr config
+  #<field name="_root_" type="string" docValues="false" indexed="true" stored="false"/>
+  #<field name="_text_" type="text_general" multiValued="true" indexed="true" stored="false"/>
+  #<field name="_version_" type="long" indexed="true" stored="false"/>
+  #<field name="author" type="string" docValues="true" indexed="true" stored="true"/>
+  #<field name="created_at" type="tdate" docValues="true" indexed="true" stored="true"/>
+  #<field name="description" type="string" indexed="true" stored="true"/>
+  #<field name="html_code" type="tlong" docValues="true" indexed="true" stored="true"/>
+  #<field name="html_content" type="text_general" indexed="true" stored="false"/>
+  #<field name="html_content_size" type="tlongs" docValues="true" indexed="true" stored="true"/>
+  #<field name="html_fetch_date" type="strings"/>
+  #<field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
+  #<field name="link_id" type="tlongs"/>
+  #<field name="link_url" type="strings"/>
+  #<field name="link_url_slug" type="strings"/>
+  #<field name="private" type="tlongs"/>
+  #<field name="saved_by_others" type="tlongs"/>
+  #<field name="tags" type="strings"/>
+  #<field name="title" type="strings"/>
+  #<field name="to_read" type="tlongs"/>
+
 # JSON that's on pinboard results page
 #{  
    #"id":"95383442",
