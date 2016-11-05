@@ -10,7 +10,7 @@ import scrapy
 class PinboardLinkItem(scrapy.Item):
     
     # fields that we get from pinboard
-    link_id         = scrapy.Field()
+    id              = scrapy.Field()
     link_url        = scrapy.Field()
     link_url_slug   = scrapy.Field()
     title           = scrapy.Field()

@@ -29,7 +29,7 @@ class PinboardSpider(scrapy.Spider):
     def parse_bookmark(self, bookmark):
         pin = PinboardLinkItem()
 
-        pin['link_id'] = bookmark['id'] 
+        pin['id'] = bookmark['id'] 
         pin['link_url'] = bookmark['url']
         pin['link_url_slug'] = bookmark['url_slug']
         pin['title'] = bookmark['title']
