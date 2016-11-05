@@ -23,7 +23,7 @@ Solr will start and precreate a core named 'pinboard' as default. Also the data 
 
     $ docker exec -t -i pinboogle_solr_1 /bin/bash
 
-You can also access the admin site at http://localhost:8983/solr
+You can also access the admin site at [http://localhost:8983/solr]
 
 ### Importing data
 
@@ -31,7 +31,7 @@ With Solr container running, use the following commands:
 
     $ docker exec -it --user=solr pinboogle_solr_1 bin/post -c pinboard /var/data/[JSON_FILE]
 
-Solr can complain about html_content filed being immense. Go to Solr web interface and change the type of this field to text_general and reimport using the command above.
+Solr can complain about html_content filed being immense. Go to Solr web interface and change the type of this field to text_general and reimport using the command above. Or check items.py file to see a sample solr schema for this data model.
 
-Test the index with Search web interface at: http://localhost:8983/solr/#/pinboard/query
+Search your links at [http://localhost:8983/solr/#/pinboard/query]
 
