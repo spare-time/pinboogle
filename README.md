@@ -13,14 +13,25 @@ $ pip install -r requirements.txt
    
 Where PINBOARD_USERNAME is the user name you are registered and NUMBER is from which timestamp you want to fetch pinboard links (use 1 to start from oldest).
 
-## Importing to Solr
+## Solr
 
-With Solr installed and running, use the following commands:
+After scraping data and adding it to data folder, start solr container with:
 
-    $ ./bin/solr create -c [NAME]
-    $ ./bin/post -c [NAME] path/to/data.json
+    $ docker-compose up -d
+
+Solr will start and precreate a core named 'pinboard' as default. Also the data folder will be available inside the container at /var/data folder. If you want to explore the container, login with:
+
+    $ docker exec -t -i pinboogle_solr_1 /bin/bash
+
+You can also access the admin site at http://localhost:8983/solr
+
+### Importing data
+
+With Solr container running, use the following commands:
+
+    $ docker exec -it --user=solr pinboogle_solr_1 bin/post -c pinboard /var/data/[JSON_FILE]
 
 Solr can complain about html_content filed being immense. Go to Solr web interface and change the type of this field to text_general and reimport using the command above.
 
-Test the index with Search web interface at: http://localhost:8983/solr/#/[NAME]/query
+Test the index with Search web interface at: http://localhost:8983/solr/#/pinboard/query
 

@@ -1,0 +1,15 @@
+version: '2'
+services:
+  solr:
+    image: solr
+    ports:
+     - "8983:8983"
+    volumes:
+      - data:/opt/solr/server/solr/mycores
+      - ./data:/var/data
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - pinboard
+volumes:
+  data:
