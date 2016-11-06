@@ -11,5 +11,13 @@ services:
       - docker-entrypoint.sh
       - solr-precreate
       - pinboard
+  web:
+    build: ./web
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./web:/app
+    links:
+      - solr
 volumes:
   data:

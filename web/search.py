@@ -10,3 +10,6 @@ def search():
 @app.errorhandler(404)
 def not_found(error):
     return 'Not found', 404
+
+if __name__ == '__main__':
+    app.run(debug=True,host='0.0.0.0')
