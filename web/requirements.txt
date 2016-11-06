@@ -1,1 +1,2 @@
 Flask==0.11.1
+SolrClient==0.1.0
