@@ -33,5 +33,17 @@ With Solr container running, use the following commands:
 
 Solr can complain about html_content filed being immense. Go to Solr web interface and change the type of this field to text_general and reimport using the command above. Or check items.py file to see a sample solr schema for this data model.
 
-Search your links at http://localhost:8983/solr/#/pinboard/query
+## Search Frontend
 
+Search interface is implemented with Flask and it's located on `./web` folder.
+
+When you run docker-compose up you will see that another container will be built. To access it, go to your browser at:
+
+    http://localhost:5000
+
+Everything that you change on `web` folder will be reflected on container, if you change or add any dependency, rebuild the container with:
+
+    $ docker-compose down
+    $ docker-compose up -d --build
+
+Frontend can fail if solr schema is different between users, sorry about that, this will be improved.
