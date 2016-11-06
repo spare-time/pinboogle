@@ -1,14 +1,15 @@
 # pinboogle
 Full text search for pinboard.in pins
 
-## Settting things up
+## Requirements
 
-To install python project dependencies:
-```sh
-$ pip install -r requirements.txt
-```
+You should have docker and docker-compose installed. We built using python 3, but things may work on previous versions.
+
 ## Executing spider
 
+To install scrapy python project dependencies:
+
+    $ pip install -r requirements.txt
     $ scrapy crawl --logfile=data/spider.log --loglevel=INFO -o data/data.json -t json -a user=[PINBOARD_USERNAME] -a after=[NUMBER] pinboard
    
 Where PINBOARD_USERNAME is the user name you are registered and NUMBER is from which timestamp you want to fetch pinboard links (use 1 to start from oldest).
