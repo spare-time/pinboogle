@@ -1,7 +1,45 @@
-<!doctype html>
-<title>Pinboard Search</title>
-{% if query %}
-  <h1>Hello {{ query }}!</h1>
-{% else %}
-  <h1>Hello, World!</h1>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pinboard Search</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+
+    {% if query %}
+        <h1>Pinboard Search for <i>{{ query }}</i></h1>
+    {% else %}
+        <h1>Pinboard Search</h1>
+    {% endif %}
+
+    <input type="text" placeholder="Type your query and hit enter" id="query_input" value="{{ query or "" }}"/>
+    <input type="button" id="query_input_btn" value="Search"/>
+
+    {% if result %}
+    <p>Results:</p>
+    {% endif %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            function doSearch(query) {
+                if (query != "") {
+                    window.location.href = "/?q=" + query;
+                }
+            }
+
+            $('#query_input').keyup(function(e){
+                if(e.keyCode == 13) {
+                    doSearch($(this).val());
+                }
+            });
+
+            $('#query_input_btn').click(function(e){
+                doSearch($('#query_input').val());
+            });
+        });
+    </script>
+  </body>
+</html>
