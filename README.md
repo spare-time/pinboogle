@@ -1,9 +1,10 @@
 # pinboogle
+
 Full text search for pinboard.in pins
 
 ## Requirements
 
-You should have docker and docker-compose installed. We built using python 3, but things may work on previous versions.
+You should have docker and docker-compose installed. We built using python 3, but things may work on previous versions. You should be using virtualenv anyway.
 
 ## Executing spider
 
@@ -52,4 +53,8 @@ Everything that you change on `web` folder will be reflected on container, if yo
     $ docker-compose down
     $ docker-compose up -d --build
 
-Frontend can fail if solr schema is different between users, sorry about that, this will be improved.
+## Disclaimer
+
+We built this to play with scrapy, solr, python and docker. 
+Pinboard has a paid subscription if you want to have full text search on your links,
+if you want high quality results, subscribe to it.
