@@ -31,7 +31,7 @@
     </p>
     <ul>
         {% for row in results %}
-        <li><a href="{{ row['link_url'][0] }}" target="_blank">{{ row['title'][0] }}</a> {{ row['created_at'] }}</li>
+        <li><a href="{{ row['link_url'] }}" target="_blank">{{ row['title'] }}</a> {{ row['created_at'] }}</li>
         {% endfor %}
     </ul>
     {% endif %}
@@ -45,6 +45,8 @@
                     window.location.href = "/?q=" + query;
                 }
             }
+
+            $('#query_input').focus();
 
             $('#query_input').keyup(function(e){
                 if(e.keyCode == 13) {
