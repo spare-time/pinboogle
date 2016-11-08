@@ -17,6 +17,7 @@
     <input type="text" placeholder="Type your query and hit enter" id="query_input" value="{{ query or "" }}"/>
     <input type="button" id="query_input_btn" value="Search"/>
 
+
     {% if results|length > 0 %}
     <p>Found {{ meta['total_results'] }} results.</p>
     <p>Pages:  

@@ -14,24 +14,32 @@ def get_solr_client():
         g.solr_client = SolrClient('http://%s:%s/solr' % (SOLR_HOST, SOLR_PORT))
     return g.solr_client
 
+def get_page_start(page):
+    try:
+        page = int(page)
+    except ValueError:
+        page = 1
+    start = (page - 1) * DEFAULT_RESULTS_PER_PAGE
+    if start < 0:
+        start = 0
+    return start
+
 @app.route('/', methods=['GET'])
 def search():
     query   = request.args.get('q', None)
+    page    = request.args.get('p', 1)
     results = []
     meta    = {}
 
     if query:
-        page  = request.args.get('p', 1)
-        try:
-            page = int(page)
-        except ValueError:
-            page = 1
-        start = (page - 1) * DEFAULT_RESULTS_PER_PAGE
-        if start < 0:
-            start = 0
+        start = get_page_start(page)
 
         solr = get_solr_client()
-        response = solr.query(SOLR_CORE, {'q': query, 'start': start, 'rows': DEFAULT_RESULTS_PER_PAGE})
+        response = solr.query(SOLR_CORE, {
+            'q': query, 
+            'start': start, 
+            'rows': DEFAULT_RESULTS_PER_PAGE
+        })
         results = response.docs
 
         meta['current_page']  = 1 + math.floor(start/DEFAULT_RESULTS_PER_PAGE) 
