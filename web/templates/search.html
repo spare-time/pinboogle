@@ -4,10 +4,10 @@
     <title>Pinboard Search</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/styles.css">
   </head>
 
   <body>
-
     {% if query %}
         <h1>Pinboard Search for <i>{{ query }}</i></h1>
     {% else %}
@@ -17,10 +17,9 @@
     <input type="text" placeholder="Type your query and hit enter" id="query_input" value="{{ query or "" }}"/>
     <input type="button" id="query_input_btn" value="Search"/>
 
-
     {% if results|length > 0 %}
     <p>Found {{ meta['total_results'] }} results.</p>
-    <p>Pages:  
+    <p>Pages:
     {% for n in range(meta['total_pages'])%}
         {% if n+1 == meta['current_page'] %}
             {{ n+1 }}
@@ -32,17 +31,17 @@
     </p>
     <ul>
         {% for row in results %}
-        <li><a href="{{ row['link_url'] }}" target="_blank">{{ row['title'] }}</a> {{ row['created_at'] }}</li>
+        <li><a href="{{ row['link_url'] }}" target="_blank">{{ row['title'] }}</a> &mdash; {{ row['created_at'][0:10] }}</li>
         {% endfor %}
     </ul>
     {% endif %}
 
-    <p>Copyright 2016 - <a href="https://github.com/spare-time">Spare Time</a> team. Licensed under Apache v2 </p>
+    <p><small>Copyright 2016 - <a href="https://github.com/spare-time">Spare Time</a> team. Licensed under Apache v2</small></p>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(function() {
             function doSearch(query) {
-                if (query != "") {
+                if (query !== "") {
                     window.location.href = "/?q=" + query;
                 }
             }
